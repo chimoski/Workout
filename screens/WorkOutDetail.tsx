@@ -1,10 +1,20 @@
 import { View, Pressable, StyleSheet, Text } from "react-native";
+import { NativeStackHeaderProps } from "@react-navigation/native-stack";
 import React from "react";
 
-const WorkOutDetail = () => {
+interface Slug {
+	route: {
+		params: {
+			slug: string;
+		};
+	};
+}
+
+const WorkOutDetail = ({ route }: NativeStackHeaderProps & Slug) => {
 	return (
 		<View style={styles.container}>
 			<Text>Work out details!</Text>
+			<Text>Slug: {route.params.slug}</Text>
 		</View>
 	);
 };
