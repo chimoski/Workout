@@ -1,7 +1,6 @@
 import { View, Pressable, StyleSheet, Text } from "react-native";
 import { NativeStackHeaderProps } from "@react-navigation/native-stack";
-import React from "react";
-
+import { useWorkoutBySlug } from "../hooks/useWorkoutBySlug";
 interface Slug {
 	route: {
 		params: {
@@ -11,10 +10,15 @@ interface Slug {
 }
 
 const WorkOutDetail = ({ route }: NativeStackHeaderProps & Slug) => {
+	const workouts = useWorkoutBySlug(route.params.slug);
+	if (workouts === null) {
+		return null;
+	}
+
 	return (
 		<View style={styles.container}>
 			<Text>Work out details!</Text>
-			<Text>Slug: {route.params.slug}</Text>
+			<Text>{workouts.name}</Text>
 		</View>
 	);
 };

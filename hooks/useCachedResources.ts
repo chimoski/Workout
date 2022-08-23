@@ -4,13 +4,14 @@ import { getWorkout, initWorkout } from "../storage/workout";
 
 export function useCachedResources() {
 	const [isLoadingComplete, setIsLoadingComplete] = useState(false);
+
 	useEffect(() => {
 		async function loadResourcesAndDataAsync() {
 			try {
 				await initWorkout();
-				await Font.loadAsync({
-					montserrat: require(""),
-				});
+				// await Font.loadAsync({
+				// 	montserrat: require(""),
+				// });
 			} catch (error) {
 				console.warn(error);
 			} finally {
@@ -20,4 +21,5 @@ export function useCachedResources() {
 		}
 		loadResourcesAndDataAsync();
 	}, [isLoadingComplete]);
+	return isLoadingComplete;
 }
