@@ -1,18 +1,26 @@
-import { View, Text, Button, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, StyleProp, ViewProps } from "react-native";
 import { Workout } from "../types";
 import { secToMin } from "../utility/secToMin";
 
-export const WorkoutItem = ({ item }: { item: Workout }) => (
-	<View style={styles.container}>
-		<Text style={styles.name}>{item.name}</Text>
-		<Text style={styles.text}>
-			<Text style={styles.span}>Duration:</Text> {secToMin(30)}
-		</Text>
-		<Text style={styles.text}>
-			<Text style={styles.span}>Difficulty:</Text> {item.difficulty}
-		</Text>
-	</View>
-);
+interface Iprops {
+	item: Workout;
+	children?: React.ReactNode;
+	childStyle?: StyleProp<ViewProps>;
+}
+export const WorkoutItem = ({ item, children, childStyle = {} }: Iprops) => {
+	return (
+		<View style={styles.container}>
+			<Text style={styles.name}>{item.name}</Text>
+			<Text style={styles.text}>
+				<Text style={styles.span}>Duration:</Text> {secToMin(30)}
+			</Text>
+			<Text style={styles.text}>
+				<Text style={styles.span}>Difficulty:</Text> {item.difficulty}s
+			</Text>
+			{children && <View style={childStyle}>{children}</View>}
+		</View>
+	);
+};
 
 const styles = StyleSheet.create({
 	container: {
